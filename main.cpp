@@ -1,5 +1,4 @@
-#include <Windows.h>
-#include <cstdio>
+#include "main.h"
 
 bool EnableVTMode()
 {
@@ -30,16 +29,34 @@ int main()
     mode |= ENABLE_MOUSE_INPUT;
     mode &= ~ENABLE_QUICK_EDIT_MODE;
     SetConsoleMode(hIn, mode);
+    SetConsoleTitleA("PBomb");
+    SetConsoleCP(65001);
+    SetConsoleOutputCP(65001);
     INPUT_RECORD inputRecord;
     DWORD events;
     while (true)
     {
-        ReadConsoleInput(hIn, &inputRecord, 1, &events);
-        if (inputRecord.EventType == MOUSE_EVENT)
+        printf("\x1b[2J\x1b[H");
+        printf("PBomb 开始\n");
+        printf("新游戏\n");
+        printf("退出\n");
+        while (true)
         {
-            MOUSE_EVENT_RECORD mouseEvent = inputRecord.Event.MouseEvent;
+            ReadConsoleInput(hIn, &inputRecord, 1, &events);
+            if (inputRecord.EventType == MOUSE_EVENT)
+            {
+                MOUSE_EVENT_RECORD option = inputRecord.Event.MouseEvent;
+                if (option.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED && option.dwEventFlags == 0 && option.dwMousePosition.X >= 0 && option.dwMousePosition.X <= 10 && option.dwMousePosition.Y == 1)
+                {
+                    NewGame();
+                    break;
+                }
+                else if (option.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED && option.dwEventFlags == 0 && option.dwMousePosition.X >= 0 && option.dwMousePosition.X <= 10 && option.dwMousePosition.Y == 2)
+                {
+                    printf("\x1b[?1049l");
+                    return 0;
+                }
+            }
         }
     }
-    printf("\x1b[?1049l");
-    return 0;
 }
