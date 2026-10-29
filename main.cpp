@@ -37,7 +37,7 @@ int main()
     while (true)
     {
         printf("\x1b[2J\x1b[H");
-        printf("PBomb 开始\n");
+        printf("PBomb 开始菜单\n");
         printf("新游戏\n");
         printf("退出\n");
         while (true)

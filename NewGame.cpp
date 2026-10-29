@@ -8,6 +8,8 @@ enum class Difficulty
     Expert
 };
 
+std::optional <Difficulty> difficulty;
+
 void NewGame()
 {
     HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
@@ -30,22 +32,35 @@ void NewGame()
                 switch (diffOption.dwMousePosition.Y)
                 {
                     case 1:
-                        // Handle "毫无压力" selection
+                        difficulty = Difficulty::Easy;
                         break;
                     case 2:
-                        // Handle "一般般" selection
+                        difficulty = Difficulty::Medium;
                         break;
                     case 3:
-                        // Handle "小心翼翼" selection
+                        difficulty = Difficulty::Hard;
                         break;
                     case 4:
-                        // Handle "无人能敌" selection
+                        difficulty = Difficulty::Expert;
                         break;
                     default:
                         break;
                 }
-                break;
+                if (difficulty.has_value())
+                {
+                    break;
+                }
+                else
+                {
+                    printf("\x1b[2J\x1b[H");
+                    printf("难度...\n");
+                    printf("毫无压力 - 8x8 10*\n");
+                    printf("一般般 - 16x16 40*\n");
+                    printf("小心翼翼 - 24x24 99*\n");
+                    printf("无人能敌 - 32x32 200*\n");
+                }
             }
         }
     }
+    
 }
