@@ -1,4 +1,7 @@
 *.exe
-.vscode
-*.ilk
 *.pdb
+.vs
+*.user
+*.suo
+ipch
+PBomb
