@@ -8,9 +8,12 @@
 #include <iostream>
 #include <limits>
 
-enum class Difficulty;
+namespace Game
+{
+	enum class Difficulty;
 
-int GetConsoleHeight();
-void cleanInputBuffer();
+	int GetConsoleHeight();
+	void cleanInputBuffer();
 
-void NewGame();
+	void NewGame();
+}

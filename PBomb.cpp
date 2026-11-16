@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
                 MOUSE_EVENT_RECORD option = inputRecord.Event.MouseEvent;
                 if (option.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED && option.dwEventFlags == 0 && option.dwMousePosition.X >= 0 && option.dwMousePosition.X <= 10 && option.dwMousePosition.Y == 1)
                 {
-                    NewGame();
+                    Game::NewGame();
                     break;
                 }
                 else if (option.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED && option.dwEventFlags == 0 && option.dwMousePosition.X >= 0 && option.dwMousePosition.X <= 10 && option.dwMousePosition.Y == 2)

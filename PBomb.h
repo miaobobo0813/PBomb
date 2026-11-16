@@ -7,4 +7,4 @@
 
 bool EnableVTMode();
 
-const std::string VERSION = "1.1";
+const std::string VERSION = "1.2";
