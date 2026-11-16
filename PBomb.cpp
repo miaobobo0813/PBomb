@@ -16,11 +16,16 @@ bool EnableVTMode()
     return true;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
     if (!EnableVTMode())
     {
         return 1;
+    }
+    if (argc >= 2 && (argv[1] == "-v" || argv[1] == "--version"))
+    {
+        printf("PBomb %s", VERSION.c_str());
+        return 0;
     }
     printf("\x1b[?1049h");
     HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
