@@ -150,6 +150,45 @@ namespace Game
                 printf("\x1b[2J\x1b[H");
             }
             int openedCnt = 0;
+            bool isAnythingZero = 1;
+            while (isAnythingZero)
+            {
+                isAnythingZero = 0;
+                for (int i = 0; i < squareSize; i++)
+                {
+                    for (int j = 0; j < squareSize; j++)
+                    {
+                        if (bombs[i][j] == 2)
+                        {
+                            int bombsAroundCnt = 0;
+                            for (int k = 0; k < 8; k++)
+                            {
+                                int kWayI = i + xDiff[k], kWayJ = j + yDiff[k];
+                                if (kWayI >= 0 && kWayI < squareSize && kWayJ >= 0 && kWayJ < squareSize)
+                                {
+                                    int bombAtKWay = bombs[kWayI][kWayJ];
+                                    bombsAroundCnt += (bombAtKWay == 1 || bombAtKWay == 4 || bombAtKWay == 6);
+                                }
+                            }
+                            if (bombsAroundCnt == 0)
+                            {
+                                for (int k = 0; k < 8; k++)
+                                {
+                                    int kWayI = i + xDiff[k], kWayJ = j + yDiff[k];
+                                    if (kWayI >= 0 && kWayI < squareSize && kWayJ >= 0 && kWayJ < squareSize)
+                                    {
+                                        if (bombs[kWayI][kWayJ] != 2)
+                                        {
+                                            isAnythingZero = 1;
+                                        }
+                                        bombs[kWayI][kWayJ] = 2;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             for (int i = 0; i < squareSize; i++)
             {
                 for (int j = 0; j < squareSize; j++)
